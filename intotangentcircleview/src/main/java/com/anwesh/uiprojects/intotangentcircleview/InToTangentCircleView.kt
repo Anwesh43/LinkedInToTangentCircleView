@@ -218,4 +218,13 @@ class InToTangentCircleView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : InToTangentCircleView {
+            val view : InToTangentCircleView = InToTangentCircleView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }

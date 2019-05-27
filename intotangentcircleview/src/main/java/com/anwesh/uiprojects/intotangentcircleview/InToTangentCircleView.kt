@@ -195,4 +195,26 @@ class InToTangentCircleView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : InToTangentCircleView) {
+
+        private val animator : Animator = Animator(view)
+        private val ittc : InToTangentCircle = InToTangentCircle(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            ittc.draw(canvas, paint)
+            animator.animate {
+                ittc.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ittc.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }

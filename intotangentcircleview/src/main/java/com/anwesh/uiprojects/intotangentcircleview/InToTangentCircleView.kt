@@ -21,6 +21,7 @@ val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#283593")
 val backColor : Int = Color.parseColor("#BDBDBD")
 val rotDeg : Float = 90f
+val delay : Long = 20
 
 fun Int.inverse() : Float = 1f / this
 fun Float.scaleFactor() : Float = Math.floor(this / scDiv).toFloat()
@@ -37,7 +38,7 @@ fun Canvas.drawInToTangent(i : Int, sc : Float, size : Float, paint : Paint) {
     save()
     translate(-size * sf, 0f)
     rotate(rotDeg * sc.divideScale(i, lines))
-    drawLine(0f, 0f, size * sc * sf, 0f, paint)
+    drawLine(0f, 0f, size * sf, 0f, paint)
     restore()
 }
 
@@ -106,7 +107,7 @@ class InToTangentCircleView(ctx : Context) : View(ctx) {
             if (animated) {
                 cb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(delay)
                     view.invalidate()
                 } catch(ex : Exception) {
 
